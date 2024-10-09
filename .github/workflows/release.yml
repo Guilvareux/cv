@@ -14,18 +14,14 @@ jobs:
   release-cv-pdf:
     name: Release CV PDF
     runs-on: ubuntu-latest
-    container: ghcr.io/willfantom/devcontainer-latex:latest-small
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Tex Packages
-        run: |
-          tlmgr install appendix lipsum ly1 logreq dashrule ifmtarg svg \
-          transparent trimspaces xkeyval textpos clearsans fontaxes titlesec \
-          graphbox fontawesome pgf academicons xhfill moresize raleway \
-          smartdiagram xstring && texhash
-      - name: Build PDF
-        run: pdflatex cv.tex
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets. GITHUB_TOKEN }}
+      - run: nix develop --impure --command pdflatex cv.tex
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
