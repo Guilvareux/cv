@@ -25,9 +25,7 @@ increases information density slightly. This includes adding:
 And a space for a profile photo was added along with a QR code that can link to
 the CV download page in order to ensure the viewer can obtain the latest copy.
 
-Also in this repository is a DevContainer that uses my [latex
-devcontainer](https://github.com/WillFantom/devcontainer-latex) image to make it
-easy to start editing with only Docker+VSCode installed (or in Codespaces)! Finally,
-there is also a GitHub Actions workflow that will build the CV when a semver
-compliant tag is pushed, releasing with the same name as the tag, and adding
-the CV PDF asset to the release.
+Also, a major change in this fork is the use of a nix-based github actions pipeline.
+see .github folder and flake.nix for more info.
+
+See nix-vm and rust-nn repos for more examples of nix's uses
